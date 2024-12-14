@@ -739,65 +739,68 @@ ul, ol {
 /*------------------------
   Home Page Room Section 
 -------------------------*/
-
 .hp-room-items {
-	margin-left: -15px;
-	margin-right: -15px;
-	overflow: hidden;
+    margin-left: -15px;
+    margin-right: -15px;
+    overflow: hidden; /* Bisa mencoba 'visible' untuk melihat apakah elemen muncul */
 }
+
 .hp-room-items .hp-room-item {
-	height: 600px;
-	margin-right: -15px;
-	position: relative;
-	overflow: hidden;
+    height: 600px;
+    margin-right: -15px;
+    position: relative; /* Ini memberikan konteks posisi untuk elemen di dalamnya */
+    overflow: hidden;
 }
-.hp-room-items .hp-room-item:hover .hr-text {
-	bottom: 135px;
-}
-.hp-room-items .hp-room-item:hover .hr-text h2 {
-	margin-bottom: 30px;
-}
+
 .hp-room-items .hp-room-item .hr-text {
-	position: absolute;
-	left: 45px;
-	right: 25px;
-	bottom: -250px;
-	-webkit-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+    position: absolute;
+    left: 45px;
+    right: 25px;
+    bottom: -250px; /* Memastikan posisi ini bekerja sesuai harapan */
+    opacity: 1; /* Membuat elemen tersembunyi saat tidak dihover */
+    transition: bottom 0.5s ease, opacity 0.5s ease; /* Hanya mengubah properti yang perlu */
+    -webkit-transition: bottom 0.5s ease, opacity 0.5s ease; /* Vendor prefix */
 }
-.hp-room-items .hp-room-item .hr-text h3 {
-	color: #ffffff;
-	margin-bottom: 15px;
+
+.hp-room-items .hp-room-item:hover .hr-text {
+    bottom: 135px; /* Ubah posisi bottom saat dihover */
+    opacity: 1; /* Menampilkan elemen dengan fade-in */
 }
+
 .hp-room-items .hp-room-item .hr-text h2 {
-	color: #FBE15C;
-	font-weight: 700;
-	margin-bottom: 50px;
-	-webkit-transition: all 0.2s;
-	-o-transition: all 0.2s;
-	transition: all 0.2s;
+    color: #FBE15C;
+    font-weight: 700;
+    margin-bottom: 50px;
+    transition: margin-bottom 0.2s ease; /* Hanya transisi margin-bottom */
 }
-.hp-room-items .hp-room-item .hr-text h2 span {
-	font-family: "Cabin", sans-serif;
-	font-size: 16px;
-	font-weight: 400;
-	color: #ffffff;
+
+.hp-room-items .hp-room-item:hover .hr-text h2 {
+    margin-bottom: 30px;
 }
+
+.hp-room-items .hp-room-item .hr-text h3 {
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
 .hp-room-items .hp-room-item .hr-text table {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
+
 .hp-room-items .hp-room-item .hr-text table tbody tr td {
-	font-size: 16px;
-	color: #ffffff;
-	line-height: 36px;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 36px;
 }
+
 .hp-room-items .hp-room-item .hr-text table tbody tr td.r-o {
-	width: 120px;
+    width: 120px;
 }
+
 .hp-room-items .hp-room-item .hr-text .primary-btn:after {
-	background: #ffffff;
+    background: #ffffff;
 }
+
 /*---------------------
   Testimonial Slider
 -----------------------*/
