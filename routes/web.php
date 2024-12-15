@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\Auth\AuthUserController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\auth\AuthUserController;
+use App\Http\Controllers\admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
