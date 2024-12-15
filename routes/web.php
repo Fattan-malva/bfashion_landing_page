@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Auth\AuthUserController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,17 @@ Route::get('rooms', [LandingPageController::class, 'rooms'])->name('landing.room
 Route::get('about', [LandingPageController::class, 'about'])->name('landing.about');
 Route::get('news', [LandingPageController::class, 'news'])->name('landing.news');
 Route::get('contact', [LandingPageController::class, 'contact'])->name('landing.contact');
+Route::get('terms-of-use', [LandingPageController::class, 'termsOfUse'])->name('landing.term-of-us');
+Route::get('privacy', [LandingPageController::class, 'privacy'])->name('landing.privacy');
+Route::get('enverionmental-policy', [LandingPageController::class, 'environmentalPolicy'])->name('landing.enverionmental-policy');
+
+Route::get('/login', [AuthUserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthUserController::class, 'login']);
+Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
+Route::post('/register', [AuthUserController::class, 'storeregister'])->name('user.storeregister');
+
+Route::middleware(['auth.check:admin'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.index');
+});
+Route::middleware(['auth.check'])->group(function () {
+});

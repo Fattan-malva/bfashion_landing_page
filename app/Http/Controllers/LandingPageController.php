@@ -31,4 +31,16 @@ class LandingPageController extends Controller
     {
         return view('landing.contact');
     }
+    public function termsOfUse()
+    {
+        return view('landing.terms-of-use');
+    }
+    public function privacy()
+    {
+        return view('landing.privacy');
+    }
+    public function environmentalPolicy()
+    {
+        return view('landing.environmental-policy');
+    }
 }

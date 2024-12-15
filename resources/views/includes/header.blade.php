@@ -10,7 +10,10 @@
                 <div class="col-lg-6">
                     <ul class="tn-left">
                         <li><i class="fa fa-phone"></i> (021) 29666777</li>
-                        <li><i class="fa fa-envelope"></i> reservation@bfashion.co.id</li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            <a href="mailto:reservation@bfashion.co.id" class="email-link">reservation@bfashion.co.id</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
@@ -23,7 +26,7 @@
                             <a href="https://x.com/bfashionjkt" target="_blank"><i class="bx bxl-twitter"
                                     style="font-size:20px;"></i></a>
                         </div>
-                        <a href="#" class="bk-btn">Booking Now</a>
+                        <a href="{{route("login")}}" class="bk-btn">Booking Now</a>
                         <!-- <div class="language-option">
                             <img src="img/flag.jpg" alt="">
                             <span>EN <i class="fa fa-angle-down"></i></span>
@@ -108,7 +111,7 @@
                     </ul>
                 </div>
             </div> -->
-        <a href="#" class="bk-btn">Booking Now</a>
+        <a href="{{route("login")}}" class="bk-btn">Booking Now</a>
     </div>
     <nav class="mainmenu mobile-menu">
         <ul>
