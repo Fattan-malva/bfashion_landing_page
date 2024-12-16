@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('img/B.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     <style>
         body {
             margin: 0;
@@ -121,10 +123,11 @@
         .back-home-link a {
             color: rgb(253, 206, 0);
             text-decoration: none;
+            font-family: 'Jost', sans-serif;
         }
 
         .back-home-link a:hover {
-            color: rgb(247, 216, 78);
+            color: rgb(166, 161, 139);
         }
 
         .no-account-link {
@@ -166,13 +169,11 @@
             }
 
             .main {
-                width: 550px;
-                height: 665px;
+                width: 90%;
+                height: 685px;
                 background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center / cover;
                 border-radius: 10px;
                 box-shadow: 5px 20px 50px #000;
-
-                /* Posisi fix di tengah */
                 position: fixed;
                 top: 50%;
                 left: 50%;
@@ -195,12 +196,8 @@
                 transition: .8s ease-in-out;
             }
         }
-
-    
     </style>
 </head>
-
-
 <body>
     <div class="logo-container">
         <img src="{{asset('img/logo.png')}}" alt="Logo" class="logo-bfashion">
