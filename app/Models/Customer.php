@@ -14,7 +14,8 @@ class Customer extends Model implements AuthenticatableContract
         'username',
         'password',
         'role',
-        'name', 
+        'name',
+
     ];
     public $timestamps = false;
 }

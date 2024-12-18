@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 use League\Flysystem\UrlGeneration\PublicUrlGenerator;
 
 class AuthUserController extends Controller
@@ -55,7 +56,7 @@ class AuthUserController extends Controller
     {
         $request->validate([
             'username' => 'required|string|max:50|unique:customer',
-            'password' => 'required|string|max:50',
+            'password' => 'required|string|min:8|confirmed',
             'role' => 'required|string|max:50',
             'name' => 'required|string|max:50|regex:/^[\p{L}\s]+$/u',
         ]);
@@ -75,5 +76,37 @@ class AuthUserController extends Controller
         $request->session()->forget('user_id');
         return redirect()->route('login')->with('success', 'Logged out successfully.');
     }
+
+    public function redirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callback()
+    {
+        $socialUser = Socialite::driver('google')->stateless()->user();
+        $registeredUser = User::where('google_id', $socialUser->id)->first();
+
+        if (!$registeredUser) {
+            $user = User::updateOrCreate([
+                'google_id' => $socialUser->id,
+            ], [
+                'name' => $socialUser->name,
+                'email' => $socialUser->email,
+                'password' => Hash::make('123x'),
+                'google_token' => $socialUser->token,
+                'google_refresh_token' => $socialUser->refreshToken,
+            ]);
+
+            Auth::login($user);
+
+            return redirect()->route('landing.rooms');
+        }
+
+        Auth::login($registeredUser);
+
+        return redirect()->route('landing.rooms');
+    }
+
 
 }

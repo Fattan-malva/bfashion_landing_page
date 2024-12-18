@@ -29,6 +29,9 @@ Route::get('/login', [AuthUserController::class, 'showLoginForm'])->name('login'
 Route::post('/login', [AuthUserController::class, 'login']);
 Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
 Route::post('/register', [AuthUserController::class, 'storeregister'])->name('user.storeregister');
+Route::get('/auth/redirect', [AuthUserController::class, 'redirect']);
+Route::get('/auth/google/callback', [AuthUserController::class, 'callback']);
+
 
 Route::middleware(['auth.check:admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.index');
