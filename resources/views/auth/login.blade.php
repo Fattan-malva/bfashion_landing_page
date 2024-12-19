@@ -209,8 +209,6 @@
             margin-bottom: -4px;
         }
 
-
-
         .no-account-link {
             color: #fff;
             font-size: 0.9em;
@@ -234,6 +232,7 @@
             width: 100%;
             height: auto;
         }
+
 
         @media (max-width: 768px) {
             body {
@@ -262,7 +261,8 @@
             }
 
             .logo-container {
-                display: none;
+                display: flex;
+                opacity: 0.1;
             }
 
             #chk:checked~.login {
@@ -307,6 +307,268 @@
             button[type="button-google-mobile"]:hover {
                 background: rgb(180, 178, 178);
             }
+        }
+
+        @media (max-width: 1024px) and (orientation: landscape) {
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                min-height: 50vh;
+                font-family: 'Jost', sans-serif;
+                background: linear-gradient(to bottom, rgb(41, 12, 12), rgb(99, 43, 43), rgb(62, 36, 36));
+                overflow: hidden;
+            }
+
+            .main {
+                width: 60%;
+                height: 385px;
+                background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center / cover;
+                border-radius: 10px;
+                box-shadow: 5px 20px 50px #000;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .logo-container {
+                display: none;
+                opacity: 0.1;
+            }
+
+            .back-home-link {
+                margin-left: 5%;
+                width: 40%;
+            }
+
+            .signup-label {
+                margin-bottom: 0px;
+            }
+
+            #chk {
+                display: none;
+            }
+
+            .password-container {
+                position: relative;
+            }
+
+            .toggle-password {
+                position: absolute;
+                right: 25%;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+
+            .signup {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+
+            label {
+                color: #fff;
+                font-size: 1.8em;
+                /* Smaller font size */
+                justify-content: center;
+                display: flex;
+                margin: 30px;
+                /* Smaller margin */
+                font-weight: bold;
+                cursor: pointer;
+                transition: .5s ease-in-out;
+            }
+
+
+            input {
+                width: 50%;
+                /* Smaller input width */
+                height: 8px;
+                /* Smaller height */
+                background: #e0dede;
+                justify-content: center;
+                display: flex;
+                margin: 10px auto;
+                /* Reduced margin */
+                padding: 10px;
+                /* Smaller padding */
+                border: none;
+                outline: none;
+                border-radius: 20px;
+                /* Smaller border-radius */
+            }
+
+            button {
+                width: 55%;
+                /* Smaller button width */
+                height: 35px;
+                /* Smaller height */
+                margin: 8px auto;
+                /* Reduced margin */
+                justify-content: center;
+                display: block;
+                color: #fff;
+                background: rgb(138, 59, 59);
+                font-size: 0.9em;
+                /* Smaller font size */
+                font-weight: bold;
+                margin-top: 5px;
+                outline: none;
+                border: none;
+                border-radius: 20px;
+                /* Smaller border-radius */
+                transition: .2s ease-in;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background: rgb(184, 68, 68);
+            }
+
+            button[type="button-google"] {
+                width: 60%;
+                /* Smaller width */
+                height: 30px;
+                /* Smaller height */
+                margin: 8px auto;
+                /* Reduced margin */
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                color: rgb(76, 75, 75);
+                background: rgb(255, 255, 255);
+                font-size: 0.9em;
+                /* Smaller font size */
+                font-weight: bold;
+                margin-top: 10px;
+                outline: none;
+                border: none;
+                border-radius: 20px;
+                /* Smaller border-radius */
+                transition: .2s ease-in;
+                cursor: pointer;
+            }
+
+            button[type="button-google"]:hover {
+                background: rgb(180, 178, 178);
+            }
+
+            button[type="button-google-mobile"] {
+                display: none;
+            }
+
+            .google-icon {
+                width: 20px;
+                /* Smaller icon */
+                height: 20px;
+                /* Smaller icon */
+                margin-right: 8px;
+            }
+
+            .google-text {
+                display: inline-block;
+                line-height: 1.2;
+                vertical-align: middle;
+            }
+
+            .login {
+                height: 380px;
+                background: #eee;
+                border-radius: 60% / 10%;
+                transform: translateY(-140px);
+                transition: .8s ease-in-out;
+            }
+
+            .login label {
+                color: rgb(138, 59, 59);
+                transform: scale(.5);
+                /* Smaller scale */
+            }
+
+            #chk:checked~.login {
+                transform: translateY(-370px);
+            }
+
+            #chk:checked~.login label {
+                transform: scale(1);
+            }
+
+            #chk:checked~.signup label {
+                transform: scale(.5);
+                /* Smaller scale */
+            }
+
+            .back-home-link {
+                margin-left: 25%;
+                /* Reduced left margin */
+                margin-top: 5px;
+                margin-bottom: -20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 50%;
+                /* Smaller width */
+            }
+
+            .back-home-link a {
+                color: rgb(253, 206, 0);
+                text-decoration: none;
+                font-family: 'Jost', sans-serif;
+            }
+
+            .back-home-link a:hover {
+                color: rgb(166, 161, 139);
+            }
+
+            .continue-google {
+                display: none;
+            }
+
+            .google-icon-signup {
+                width: 16px;
+                /* Smaller icon size */
+                height: 16px;
+                /* Smaller icon size */
+                margin-bottom: -4px;
+            }
+
+            .no-account-link {
+                color: #fff;
+                font-size: 0.8em;
+                /* Smaller font size */
+                text-align: left;
+                display: block;
+                margin-left: 25%;
+                /* Smaller left margin */
+                margin-top: -5px;
+                /* Reduced top margin */
+                margin-bottom: 0px;
+                cursor: pointer;
+            }
+
+            .logo-container {
+                margin-bottom: 15px;
+                /* Reduced bottom margin */
+                text-align: center;
+            }
+
+            .logo-bfashion {
+                max-width: 250px;
+                /* Smaller logo width */
+                width: 100%;
+                height: auto;
+            }
+
+            .our {
+                margin-top: -5px;
+                margin-bottom: -5px;
+            }
+
         }
     </style>
 </head>
@@ -440,6 +702,7 @@
                     required>
                 <label class="no-account-link" for="chk">Don't have an account?</label>
                 <button type="submit">Login</button>
+                <p style="text-align:center;" class="our">our</p>
                 <button type="button-google" onclick="window.location.href='/auth/redirect'"
                     class="btn btn-light d-flex align-items-center justify-content-center">
                     <img src="/img/google.svg" alt="Google Icon" class="google-icon">

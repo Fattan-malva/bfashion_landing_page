@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
 </head>
 <body>
-    <h1 class="text-center mt-5">WELLCOME TO DASHBOARD ADMIN MAS FATTAN!!!!!</h1>
+    <h1 class="text-center mt-5">WELLCOME TO DASHBOARD ADMIN</h1>
 </body>
 
 </html>
