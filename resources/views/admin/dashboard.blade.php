@@ -5,19 +5,19 @@
     .card {
         padding: 50px;
         border: none;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgb(230,231,235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     }
 
     .small {
         padding: 20px 20px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgb(230,231,235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         margin-right: 35px;
     }
 
     /* Styling for portrait cards */
     .portrait-card {
         height: 400px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgb(230,231,235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         padding: 15px;
         text-align: center;
     }
@@ -85,5 +85,4 @@
         </div>
     </div>
 </div>
-
 @endsection

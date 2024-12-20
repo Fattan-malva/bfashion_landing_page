@@ -2,8 +2,8 @@
     /* Header */
     .header {
         padding: 10px;
-        background-color: rgb(255, 255, 255);
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -5px, rgba(0, 0, 0, 0.3) 0px 4px 8px -8px;
+        background-color: #ffffff;
+        box-shadow: rgb(230,231,235) 0px 6px 12px -5px, rgba(0, 0, 0, 0.3) 0px 4px 8px -8px;
         border-radius: 10px;
         position: fixed;
         top: 10px;
@@ -33,6 +33,11 @@
         border-radius: 15px;
         border: 1px solid #ccc;
         width: 200px;
+        transition: border-color 0.3s;
+    }
+
+    .header-right .search-input:focus {
+        border-color: #007bff;
     }
 
     .header .header-right {
@@ -41,7 +46,7 @@
     }
 
     .header .user-avatar {
-        background-color: #515d6a;
+        background-color: #007bff;
         color: white;
         width: 40px;
         height: 40px;
@@ -51,6 +56,11 @@
         align-items: center;
         font-size: 18px;
         cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .header .user-avatar:hover {
+        background-color: #0056b3;
     }
 
     .user-dropdown {
@@ -81,6 +91,7 @@
         display: block;
         text-decoration: none;
         color: #333;
+        transition: background-color 0.3s;
     }
 
     .user-dropdown a:hover {
@@ -116,7 +127,6 @@
     #logoutForm {
         margin-right: 80px;
         margin-bottom: 10px;
-        /* Adjusts the form's position to the right */
     }
 
     .logout-btn {
@@ -137,14 +147,11 @@
 
     .logout-btn:hover {
         color: #B82020;
-        /* Change text color on hover */
         transform: translateX(5px);
-        /* Adds a slight move effect to the right */
     }
 
     .logout-btn:hover i {
         color: #B82020;
-        /* Change icon color on hover */
     }
 
     .toggle-btn {
@@ -227,6 +234,7 @@
             dropdown.classList.remove('show');
         }
     });
+
     function confirmLogout(event) {
         event.preventDefault(); // Prevent form submission
 

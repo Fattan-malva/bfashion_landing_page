@@ -9,7 +9,7 @@
         background-color: rgb(255, 255, 255);
         color: black;
         transition: width 0.5s ease;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgb(230,231,235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     }
 
     .sidebar .logo {
@@ -122,9 +122,13 @@
                 <i class="fas fa-home"></i> <span>Dashboard</span>
             </a>
         </li>
-        <li><a href="#" class="d-flex align-items-center"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+        <li><a href="#" class="d-flex align-items-center"><i class="fas fa-hotel"></i> <span>Rooms</span></a></li>
+        <li class="{{ request()->routeIs('admin.user-management') ? 'active' : '' }}">
+            <a href="{{ route('admin.user-management') }}" class="d-flex align-items-center">
+                <i class="fas fa-users"></i> <span>Customers</span>
+            </a>
+        </li>
         <li><a href="#" class="d-flex align-items-center"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
-        <li><a href="#" class="d-flex align-items-center"><i class="fas fa-chart-bar"></i> <span>Reports</span></a></li>
     </ul>
 </div>
 
