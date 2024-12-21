@@ -1,28 +1,7 @@
 @extends('layouts.appAdmin')
 
 @section('content')
-<style>
-    .card {
-        padding: 50px;
-        border: none;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    }
-
-    .small {
-        padding: 20px 20px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-        margin-right: 35px;
-    }
-
-    #offcanvasCreateCustomerLabel {
-        padding: 1rem 1rem;
-        margin-bottom: 0;
-        border-radius: 20px;
-        color: #696CFF;
-        background-color: rgb(235, 236, 236);
-    }
-</style>
-
+<link rel="stylesheet" href="{{ asset('view/style/user-management.css') }}">
 <div class="row">
     <div class="col-md-8">
         <div class="card p-4">
@@ -48,24 +27,41 @@
                 <table id="customerTable" class="table table-responsive">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Name</th>
-                            <th>Role</th>
-                            <th>Login Type</th>
-                            <th>Actions</th>
+                            <th>#</th> <!-- Nomor urut -->
+                            <th class="USER">USER</th>
+                            <th>ROLE</th>
+                            <th>TYPE ACCOUT</th>
+                            <th>ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($customers as $customer)
+                        @foreach ($customers as $index => $customer)
                             <tr>
-                                <td>{{ $customer->username }}</td>
-                                <td>{{ $customer->name }}</td>
+                                <td>{{ $index + 1 }}</td> <!-- Menambahkan nomor urut -->
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <!-- Lingkaran dengan dua huruf pertama dari nama -->
+                                        <div class="avatar"
+                                            style="background-color: {{ '#' . substr(md5(rand()), 0, 6) }};">
+                                            {{ strtoupper(substr($customer->name, 0, 2)) }}
+                                        </div>
+                                        <div class="ms-2">
+                                            <div style="font-size: 18px; font-weight: bold;">{{ $customer->name }}</div>
+                                            <div style="font-size: 14px; color: #6c757d;">{{ $customer->username }}</div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ $customer->role }}</td>
                                 <td>{{ $customer->login_type }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-warning">Edit</button>
-                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm text-primary border-0">
+                                        <i class="fas fa-circle-info fa-lg"></i> <!-- Ikon edit -->
+                                    </button>
+                                    <button class="btn btn-sm text-danger border-0">
+                                        <i class="fas fa-trash fa-lg"></i> <!-- Ikon delete -->
+                                    </button>
                                 </td>
+
                             </tr>
                         @endforeach
                         @if ($customers->count() < 10)
@@ -83,7 +79,6 @@
                 </table>
             </div>
         </div>
-
     </div>
     <div class="col-md-4">
         <div class="card small mb-4">
@@ -102,7 +97,7 @@
             <h5>Small Card 4</h5>
             <p>Content for small card 4.</p>
         </div>
-        <div class="card small" style="padding-bottom: 280px;">
+        <div class="card small" style="padding-bottom: 440px;">
             <h5>Small 5</h5>
             <p>Content for small card 4.</p>
         </div>
@@ -203,7 +198,6 @@
         @endif
     });
 </script>
-
 <script>
     $(document).ready(function () {
         $('#customerTable').DataTable({
@@ -247,8 +241,29 @@
         $('#customerTable_filter input').before('<i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>');
     });
 </script>
+<!-- Style Page -->
+<style>
+    .card {
+        padding: 50px;
+        border: none;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
 
+    .small {
+        padding: 20px 20px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        margin-right: 35px;
+    }
 
+    #offcanvasCreateCustomerLabel {
+        padding: 1rem 1rem;
+        margin-bottom: 0;
+        border-radius: 20px;
+        color: #696CFF;
+        background-color: rgb(235, 236, 236);
+    }
+</style>
+<!-- Style Full Table -->
 <style>
     #customerTable_filter {
         margin-bottom: 15px;
@@ -328,10 +343,27 @@
 
     #customerTable td {
         width: auto;
+        text-align: center;
+        vertical-align: middle;
+        padding: 10px;
     }
 
+    #customerTable th {
+        width: auto;
+        text-align: center;
+        vertical-align: middle;
+        padding: 10px;
+    }
+
+    #customerTable th.USER {
+        text-align: left;
+        vertical-align: middle;
+        padding: 10px;
+    }
+
+
     .empty-row td {
-        height: 2.96em;
+        height: 4.3em;
         padding: 0;
     }
 
@@ -350,6 +382,18 @@
     #customerTable tr:last-child td {
         border-bottom: none;
     }
-</style>
 
+    .avatar {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+</style>
 @endsection
