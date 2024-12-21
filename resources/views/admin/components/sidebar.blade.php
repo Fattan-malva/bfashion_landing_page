@@ -9,10 +9,10 @@
         background-color: rgb(255, 255, 255);
         color: black;
         transition: width 0.5s ease;
-        box-shadow: rgb(230,231,235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgb(230, 231, 235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     }
 
-    .sidebar .logo {
+    /* .sidebar .logo {
         padding: 20px;
         text-align: center;
     }
@@ -20,7 +20,7 @@
     .sidebar .logo img {
         max-width: 80%;
         height: auto;
-    }
+    } */
 
 
     .sidebar.collapsed {
@@ -107,12 +107,53 @@
             display: block;
         }
     }
+
+    .sidebar .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+    }
+
+    .sidebar .logo-text {
+    color: #fff;
+    background-color: #696cff;
+    border-color: #696cff;
+    box-shadow: 0 .125rem .25rem #696cff66;
+    border-radius: 5px;
+    padding: 5px 65px;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    width: fit-content;
+    transition: all 0.8s ease;
+}
+
+.sidebar.collapsed .logo-text {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 50px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.8s ease;
+}
+
+
+    .sidebar.collapsed .logo-text::before {
+        content: "B";
+        display: block;
+        text-align: center;
+    }
 </style>
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar text-white">
     <!-- Logo -->
     <div class="logo">
-        <img src="{{ asset('img/logoBadmin.png') }}" alt="Logo">
+        <!-- <img src="{{ asset('img/logoBadmin.png') }}" alt="Logo"> -->
+        <h1 class="logo-text">B-admin</h1>
     </div>
 
     <!-- Menu Items -->
@@ -139,3 +180,4 @@
     <a href="#" class="text-white"><i class="fas fa-cog"></i><br>Settings</a>
     <a href="#" class="text-white"><i class="fas fa-chart-bar"></i><br>Reports</a>
 </div>
+

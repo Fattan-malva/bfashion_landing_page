@@ -19,6 +19,7 @@ class CustomerSeeder extends Seeder
             'password' => Hash::make('jangandihack'),
             'role' => 'admin',
             'name' => 'EDP admin',
+            'login_type' => 'Master',
         ]);
     }
 }

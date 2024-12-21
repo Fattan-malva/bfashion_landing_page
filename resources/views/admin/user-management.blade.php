@@ -13,14 +13,24 @@
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         margin-right: 35px;
     }
+
+    #offcanvasCreateCustomerLabel {
+        padding: 1rem 1rem;
+        margin-bottom: 0;
+        border-radius: 20px;
+        color: #696CFF;
+        background-color: rgb(235, 236, 236);
+    }
 </style>
+
 <div class="row">
     <div class="col-md-8">
         <div class="card p-4">
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <h1>Management User</h1>
-                    <p>Manage your users efficiently.</p>
+                    <p>User management controls system access, assigns roles, and tracks activities to ensure security
+                        and efficiency.</p>
                     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasCreateCustomer" aria-controls="offcanvasCreateCustomer">
                         <i class="fa-solid fa-address-book"></i> Add New User
@@ -28,20 +38,53 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('img/useradd.png') }}" alt="Image" class="img-fluid"
-                        style="max-width: 120px; margin-bottom:8px; margin-left:20px;" />
+                        style="max-width: 120px; margin-bottom:8px; margin-right:50px;" />
                 </div>
             </div>
         </div>
-        <div class="card p-4 mt-4">
-            <div class="d-flex align-items-center justify-content-between" style="padding-bottom:170px;">
-                <div>
-                    <h1>Content Premier</h1>
-                    <p>This is the main content area.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
+        <div class="card p-4 mt-4">
+            <div>
+                <table id="customerTable" class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Login Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($customers as $customer)
+                            <tr>
+                                <td>{{ $customer->username }}</td>
+                                <td>{{ $customer->name }}</td>
+                                <td>{{ $customer->role }}</td>
+                                <td>{{ $customer->login_type }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @if ($customers->count() < 10)
+                            @for ($i = 0; $i < 10 - $customers->count(); $i++)
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            @endfor
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
     <div class="col-md-4">
         <div class="card small mb-4">
             <h5>Small Card 1</h5>
@@ -55,16 +98,17 @@
             <h5>Small Card 3</h5>
             <p>Content for small card 3.</p>
         </div>
-        <div class="card small">
+        <div class="card small mb-4">
             <h5>Small Card 4</h5>
+            <p>Content for small card 4.</p>
+        </div>
+        <div class="card small" style="padding-bottom: 280px;">
+            <h5>Small 5</h5>
             <p>Content for small card 4.</p>
         </div>
     </div>
 </div>
-<!-- Include SweetAlert2 (ensure you have it in your project) -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- Off-Canvas Content -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCreateCustomer"
     aria-labelledby="offcanvasCreateCustomerLabel">
     <div class="offcanvas-header">
@@ -75,7 +119,7 @@
         <form action="{{ route('admin.customer-store') }}" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="form-label">Email</label>
                 <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
                     name="username" value="{{ old('username') }}" required>
                 @error('username')
@@ -91,6 +135,14 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                    value="{{ old('name') }}" required>
+                @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="role" class="form-label">Role</label>
                 <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
                     <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
@@ -100,16 +152,10 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                    value="{{ old('name') }}" required>
-                @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="create_another" value="1" class="btn btn-secondary">Create &
+                    Another</button>
                 <button type="button" class="btn btn-danger btn-label-danger" data-bs-dismiss="offcanvas"
                     aria-label="Close">Cancel</button>
             </div>
@@ -117,16 +163,14 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-    // If there is any validation error, show SweetAlert Toast but do not close the offcanvas
-    @if ($errors->any())
-        document.addEventListener('DOMContentLoaded', function () {
-            // Manually triggering the offcanvas and preventing it from closing
+    document.addEventListener('DOMContentLoaded', function () {
+        @if ($errors->any())
             var offcanvasElement = document.getElementById('offcanvasCreateCustomer');
             var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
-            offcanvas.show(); // Keep offcanvas open when there is an error
-
-            // Show SweetAlert2 toast notification with the first error
+            offcanvas.show();
             Swal.fire({
                 icon: 'error',
                 title: 'Validation Error!',
@@ -136,30 +180,176 @@
                 showConfirmButton: false,
                 timer: 3000
             });
-        });
-    @endif
-    // Handle success message
-    @if (session('success'))
-        document.addEventListener('DOMContentLoaded', function () {
-            // Show SweetAlert2 toast notification for success
+        @endif
+        @if (session('success'))
             Swal.fire({
                 icon: 'success',
-                title: 'Customer Added Successfully!',
+                title: 'Success!',
                 text: '{{ session('success') }}',
                 toast: true,
-                position: 'top-end',
+                position: 'top',
                 showConfirmButton: false,
                 timer: 3000
             });
+            if ("{{ session('create_another') }}") {
+                var offcanvasElement = document.getElementById('offcanvasCreateCustomer');
+                var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                offcanvas.show();
+            } else {
+                var offcanvasElement = document.getElementById('offcanvasCreateCustomer');
+                var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                offcanvas.hide();
+            }
+        @endif
+    });
+</script>
 
-            // Close the offcanvas after success
-            var offcanvasElement = document.getElementById('offcanvasCreateCustomer');
-            var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
-            offcanvas.hide(); // Close offcanvas on success
+<script>
+    $(document).ready(function () {
+        $('#customerTable').DataTable({
+            responsive: true,
+            paging: true,
+            searching: true,
+            lengthChange: true,
+            autoWidth: false,
+            pageLength: 10,
+            drawCallback: function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).data().length;
+                var emptyRows = 10 - rows;
+                if (emptyRows > 0) {
+                    for (var i = 0; i < emptyRows; i++) {
+                        $('#customerTable tbody').append(
+                            '<tr class="empty-row">' +
+                            '<td>&nbsp;</td>' +
+                            '<td>&nbsp;</td>' +
+                            '<td>&nbsp;</td>' +
+                            '<td>&nbsp;</td>' +
+                            '<td>&nbsp;</td>' +
+                            '</tr>'
+                        );
+                    }
+                }
+            },
+            language: {
+                paginate: {
+                    next: "<i class='bx bx-chevron-right'></i> ",
+                    previous: "<i class='bx bx-chevron-left'></i> "
+                },
+                lengthMenu: "_MENU_",
+                info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                search: "",
+            }
         });
-    @endif
+
+        // Tambahkan ikon pencarian di dalam placeholder
+        $('#customerTable_filter input').attr('placeholder', 'Search...').css('padding-left', '25px');
+        $('#customerTable_filter input').before('<i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>');
+    });
 </script>
 
 
+<style>
+    #customerTable_filter {
+        margin-bottom: 15px;
+        margin-left: 42%;
+        position: relative;
+    }
+
+    #customerTable_filter input {
+        padding-left: 50px;
+        border-radius: 20px;
+    }
+
+    #customerTable_filter i {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #384551;
+    }
+
+    /* Custom table header and row color */
+    .dataTables_wrapper .dataTables_length select,
+    .dataTables_wrapper .dataTables_filter input,
+    .dataTables_wrapper .dataTables_info {
+        color: #5a56e0;
+    }
+
+    /* Gaya untuk halaman aktif */
+    .active>.page-link,
+    .page-link.active {
+        background-color: #696CFF !important;
+        border-radius: 7px !important;
+        border: none !important;
+        color: white !important;
+        box-shadow: none !important;
+    }
+
+    /* Gaya untuk tombol halaman normal dan hover */
+    .page-link,
+    .page-link.active {
+        background-color: #F2F3F4 !important;
+        border-radius: 7px !important;
+        border: none !important;
+        color: #384551 !important;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Efek hover untuk tombol halaman */
+    .page-link:hover {
+        background-color: rgb(213, 214, 214) !important;
+        color: #696CFF !important;
+    }
+
+    /* Menghilangkan border atau box-shadow biru terang saat fokus */
+    .page-link:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        margin: 0 5px;
+    }
+
+    table.dataTable tbody tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #fff;
+    }
+
+    #customerTable td {
+        width: auto;
+    }
+
+    .empty-row td {
+        height: 2.96em;
+        padding: 0;
+    }
+
+    #customerTable td,
+    #customerTable th {
+        border-left: none;
+        border-right: none;
+    }
+
+    #customerTable td,
+    #customerTable th {
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+    }
+
+    #customerTable tr:last-child td {
+        border-bottom: none;
+    }
+</style>
 
 @endsection

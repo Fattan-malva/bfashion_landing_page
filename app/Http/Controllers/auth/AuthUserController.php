@@ -59,12 +59,14 @@ class AuthUserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|string|max:50',
             'name' => 'required|string|max:50|regex:/^[\p{L}\s]+$/u',
+            'login_type' => 'required|string|max:50',
         ]);
         $customer = Customer::create([
             'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password')), // Hashing the password
+            'password' => Hash::make($request->input('password')),
             'role' => $request->input('role'),
             'name' => $request->input('name'),
+            'login_type' => $request->input('login_type'),
         ]);
         return redirect()->route('login')->with('success', 'Register successfully.');
     }
@@ -88,6 +90,7 @@ class AuthUserController extends Controller
         $registeredUser = User::where('google_id', $socialUser->id)->first();
 
         if (!$registeredUser) {
+            // Create or update the User record
             $user = User::updateOrCreate([
                 'google_id' => $socialUser->id,
             ], [
@@ -98,15 +101,27 @@ class AuthUserController extends Controller
                 'google_refresh_token' => $socialUser->refreshToken,
             ]);
 
+            // Create the Customer record
+            $customer = Customer::create([
+                'username' => $socialUser->email,  
+                'password' => Hash::make('123x'), 
+                'role' => 'user', 
+                'name' => $socialUser->name,
+                'login_type' => 'Google Account', 
+            ]);
+
+            // Login the user
             Auth::login($user);
 
             return redirect()->route('landing.rooms');
         }
 
+        // If the user is already registered, log them in
         Auth::login($registeredUser);
 
         return redirect()->route('landing.rooms');
     }
+
 
 
 }

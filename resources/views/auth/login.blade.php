@@ -644,6 +644,7 @@
                 </div>
 
                 <input type="hidden" name="role" value="user">
+                <input type="hidden" name="login_type" value="Register Account">
 
                 <div class="back-home-link d-flex justify-content-between align-items-center">
                     <p><a href="{{ route('landing.index') }}">Back to Home?</a></p>

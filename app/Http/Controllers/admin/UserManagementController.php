@@ -11,7 +11,8 @@ class UserManagementController extends Controller
 {
     public function index()
     {
-        return view('admin.user-management');
+        $customers = Customer::all();
+        return view('admin.user-management', compact('customers'));
     }
 
     public function create()
@@ -23,22 +24,30 @@ class UserManagementController extends Controller
     {
         $request->validate([
             'username' => 'required|unique:customer,username',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
             'role' => 'required',
             'name' => 'required',
+            'login_type' => 'Created by Admin',
         ]);
 
+        // Create and save the new customer
         $customer = new Customer([
             'username' => $request->input('username'),
             'password' => Hash::make($request->input('password')),
             'role' => $request->input('role'),
             'name' => $request->input('name'),
+            'login_type' => "Created by Admin",
         ]);
-
         $customer->save();
+
+        // Check if the "Create & Another" button was pressed
+        if ($request->has('create_another')) {
+            return redirect()->route('admin.user-management')->with('success', 'Customer added successfully!')->with('create_another', true);
+        }
 
         return redirect()->route('admin.user-management')->with('success', 'Customer added successfully!');
     }
+
 
 
     public function edit($id)

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('role');
             $table->string('name');
+            $table->string('login_type');
             $table->timestamps();
         });
         Artisan::call('db:seed', ['--class' => 'CustomerSeeder']);
