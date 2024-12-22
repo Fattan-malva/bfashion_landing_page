@@ -1,7 +1,6 @@
 @extends('layouts.appAdmin')
-
+@section('header_title', 'Customers')
 @section('content')
-<link rel="stylesheet" href="{{ asset('view/style/user-management.css') }}">
 <div class="row">
     <div class="col-md-8">
         <div class="card p-4">
@@ -21,13 +20,12 @@
                 </div>
             </div>
         </div>
-
         <div class="card p-4 mt-4">
             <div>
                 <table id="customerTable" class="table table-responsive">
                     <thead>
                         <tr>
-                            <th>#</th> <!-- Nomor urut -->
+                            <th>#</th>
                             <th class="USER">USER</th>
                             <th>ROLE</th>
                             <th>TYPE ACCOUT</th>
@@ -37,10 +35,9 @@
                     <tbody>
                         @foreach ($customers as $index => $customer)
                             <tr>
-                                <td>{{ $index + 1 }}</td> <!-- Menambahkan nomor urut -->
+                                <td>{{ $index + 1 }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <!-- Lingkaran dengan dua huruf pertama dari nama -->
                                         <div class="avatar"
                                             style="background-color: {{ '#' . substr(md5(rand()), 0, 6) }};">
                                             {{ strtoupper(substr($customer->name, 0, 2)) }}
@@ -54,31 +51,35 @@
                                 <td>{{ $customer->role }}</td>
                                 <td>{{ $customer->login_type }}</td>
                                 <td>
-                                    <button class="btn btn-sm text-primary border-0">
-                                        <i class="fas fa-circle-info fa-lg"></i> <!-- Ikon edit -->
-                                    </button>
-                                    <button class="btn btn-sm text-danger border-0">
-                                        <i class="fas fa-trash fa-lg"></i> <!-- Ikon delete -->
-                                    </button>
-                                </td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm border-0 btn-action" title="Detail">
+                                            <i class='bx bxs-user-detail' style="font-size: 25px;"></i>
+                                        </button>
+                                        <button class="btn btn-sm border-0 btn-action" title="Delete"
+                                            onclick="confirmDelete({{ $customer->id }})">
+                                            <i class='bx bxs-trash' style="font-size: 20px;"></i>
+                                        </button>
+                                        <!-- Dropdown Button -->
+                                        <button class="btn btn-sm border-0 btn-action" data-bs-toggle="dropdown"
+                                            aria-expanded="false" title="Option">
+                                            <i class='bx bx-dots-vertical-rounded' style="font-size: 20px;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Option 1</a></li>
+                                            <li><a class="dropdown-item" href="#">Option 2</a></li>
+                                        </ul>
 
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
-                        @if ($customers->count() < 10)
-                            @for ($i = 0; $i < 10 - $customers->count(); $i++)
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                            @endfor
-                        @endif
                     </tbody>
                 </table>
             </div>
         </div>
+
+
+
     </div>
     <div class="col-md-4">
         <div class="card small mb-4">
@@ -115,7 +116,7 @@
             @csrf
             <div class="mb-3">
                 <label for="username" class="form-label">Email</label>
-                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
+                <input type="email" class="form-control @error('username') is-invalid @enderror" id="username"
                     name="username" value="{{ old('username') }}" required>
                 @error('username')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -197,6 +198,38 @@
             }
         @endif
     });
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#B82020',
+            cancelButtonColor: '#a6a4a4',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/customer-destroy/${id}`)
+                    .then(response => {
+                        window.location.reload();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'The customer has been deleted.',
+                            toast: true,
+                            position: 'top',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire('Error!', 'Something went wrong!', 'error');
+                    });
+            }
+        });
+    }
+
 </script>
 <script>
     $(document).ready(function () {
@@ -246,12 +279,12 @@
     .card {
         padding: 50px;
         border: none;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgb(230, 231, 235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     }
 
     .small {
         padding: 20px 20px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgb(230, 231, 235) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         margin-right: 35px;
     }
 
@@ -394,6 +427,43 @@
         font-weight: bold;
         font-size: 16px;
         text-transform: uppercase;
+    }
+
+    .btn-action {
+        transition: transform 0.3s ease;
+        color: #646E78;
+    }
+
+    /* Efek saat hover: tombol naik ke atas dengan bayangan */
+    .btn-action:hover {
+        transform: translateY(-2px);
+        color: #646E78;
+    }
+
+    .dropdown-menu {
+        left: auto;
+        right: 0;
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 10px;
+    }
+
+    .dropdown-menu a {
+        color: #384551;
+    }
+
+    .dropdown-menu a:hover {
+        color: #696CFF;
+        background-color: rgb(235, 236, 236);
+        border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .table-responsive {
+            -webkit-overflow-scrolling: touch;
+            overflow-x: auto;
+            display: block;
+        }
     }
 </style>
 @endsection

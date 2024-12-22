@@ -3,13 +3,13 @@
     .header {
         padding: 10px;
         background-color: #ffffff;
-        box-shadow: rgb(230,231,235) 0px 6px 12px -5px, rgba(0, 0, 0, 0.3) 0px 4px 8px -8px;
+        box-shadow: rgb(230, 231, 235) 0px 6px 12px -5px, rgba(0, 0, 0, 0.3) 0px 4px 8px -8px;
         border-radius: 10px;
         position: fixed;
         top: 10px;
         left: 305px;
         width: calc(100% - 330px);
-        z-index: 1040;
+        z-index: 999;
         transition: margin-left 0.5s ease, left 0.5s ease, width 0.5s ease;
         display: flex;
         justify-content: space-between;
@@ -102,26 +102,29 @@
         .sidebar {
             display: none;
         }
-
-        .content {
-            margin-left: 0;
-        }
-
         .header {
             width: 100%;
-            left: 0;
+            height: auto;
             padding: 10px 20px;
             justify-content: center;
+            top: -1px;
+            border-radius: 20px;
+            left: 0;
+            right: 0;
         }
-
-        .header .header-right {
-            position: relative;
-            right: auto;
-        }
-
         .header .toggle-btn {
             display: none;
         }
+        .search-input {
+            display: none;
+        }
+        #headerTitle {
+            margin-right: 100%;
+        }
+        .header .user-avatar {
+            margin-left: 210px;
+        }
+
     }
 
     #logoutForm {
@@ -146,12 +149,14 @@
     }
 
     .logout-btn:hover {
-        color: #B82020;
+        color: #ff3e1d;
         transform: translateX(5px);
+        background-color: #FFE0DB;
+        border-radius: 5px;
     }
 
     .logout-btn:hover i {
-        color: #B82020;
+        color: #ff3e1d;
     }
 
     .toggle-btn {
@@ -171,9 +176,40 @@
     .toggle-btn:hover {
         transform: scale(1.1);
     }
+
+    /* Backdrop Blur */
+    .header-backdrop {
+        position: fixed;
+        top: 0;
+        left: 305px;
+        width: calc(100% - 330px);
+        height: 70px;
+        /* Adjust to match the header height */
+        z-index: 998;
+        backdrop-filter: blur(5px);
+        /* Adjust blur intensity */
+        background-color: rgba(255, 255, 255, 0);
+        /* Semi-transparent white background */
+        transition: margin-left 0.5s ease, left 0.5s ease, width 0.5s ease, backdrop-filter 0.5s ease;
+    }
+
+    .header-backdrop.collapsed {
+        left: 35px;
+        width: 90%;
+        margin-left: 80px;
+    }
+
+    @media (max-width: 768px) {
+        .header-backdrop {
+            left: 0;
+            width: 100%;
+            top: -50px;
+        }
+    }
 </style>
 
 <!-- Header -->
+<div id="headerBackdrop" class="header-backdrop"></div>
 <div id="header" class="header">
     <div class="header-left d-flex align-items-center">
         <button id="toggleSidebar" class="btn toggle-btn">

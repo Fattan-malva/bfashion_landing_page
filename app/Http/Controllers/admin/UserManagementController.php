@@ -80,9 +80,18 @@ class UserManagementController extends Controller
 
     public function destroy($id)
     {
-        $customer = Customer::findOrFail($id);
+        // Find the customer by ID
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json(['error' => 'Customer not found'], 404);
+        }
+
+        // Perform the delete action
         $customer->delete();
 
-        return redirect()->route('admin.user-management')->with('success', 'Customer deleted successfully!');
+        // Return a success response
+        return response()->json(['success' => 'Customer deleted successfully']);
     }
+
 }

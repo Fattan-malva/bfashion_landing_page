@@ -1,5 +1,5 @@
 @extends('layouts.appAdmin')
-
+@section('header_title', 'Dashboard')
 @section('content')
 <style>
     .card {

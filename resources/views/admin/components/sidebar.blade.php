@@ -71,7 +71,7 @@
     }
 
     .sidebar ul li.active a {
-        color: black;
+        color: #696CFF;
         font-weight: bold;
     }
 
@@ -116,30 +116,30 @@
     }
 
     .sidebar .logo-text {
-    color: #fff;
-    background-color: #696cff;
-    border-color: #696cff;
-    box-shadow: 0 .125rem .25rem #696cff66;
-    border-radius: 5px;
-    padding: 5px 65px;
-    font-size: 1.5rem;
-    white-space: nowrap;
-    overflow: hidden;
-    width: fit-content;
-    transition: all 0.8s ease;
-}
+        color: #fff;
+        background-color: #696cff;
+        border-color: #696cff;
+        box-shadow: 0 .125rem .25rem #696cff66;
+        border-radius: 5px;
+        padding: 5px 65px;
+        font-size: 1.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        width: fit-content;
+        transition: all 0.8s ease;
+    }
 
-.sidebar.collapsed .logo-text {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
-    text-align: center;
-    line-height: 50px;
-    padding: 0;
-    overflow: hidden;
-    transition: all 0.8s ease;
-}
+    .sidebar.collapsed .logo-text {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        text-align: center;
+        line-height: 50px;
+        padding: 0;
+        overflow: hidden;
+        transition: all 0.8s ease;
+    }
 
 
     .sidebar.collapsed .logo-text::before {
@@ -180,4 +180,3 @@
     <a href="#" class="text-white"><i class="fas fa-cog"></i><br>Settings</a>
     <a href="#" class="text-white"><i class="fas fa-chart-bar"></i><br>Reports</a>
 </div>
-
